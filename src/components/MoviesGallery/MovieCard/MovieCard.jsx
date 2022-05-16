@@ -1,15 +1,20 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { breakpoints } from "utils/breakpoints";
+import NoPoster from "UI/movie-poster-coming-soon.jpg";
 
 const MovieCard = ({ title, posterPath, genres }) => (
   <Wrapper>
     <Thumb>
-      <Picture
-        alt={title}
-        loading="lazy"
-        src={`https://themoviedb.org/t/p/w342${posterPath}`}
-      />
+      {posterPath !== null ? (
+        <Picture
+          alt={title}
+          loading="lazy"
+          src={`https://themoviedb.org/t/p/w342${posterPath}`}
+        />
+      ) : (
+        <Picture alt={title} loading="lazy" src={NoPoster} />
+      )}
     </Thumb>
 
     <Title>{title}</Title>
@@ -23,12 +28,10 @@ const Wrapper = styled.div`
   width: 260px;
   transform: scale(1);
   transition: transform ${(p) => p.theme.transition};
-  @media screen and (min-width: 768px) {
+  @media ${breakpoints.tablet} {
     width: 300px;
   }
-  @media screen and (min-width: 1024px) {
-    /* width: 305px; */
-  }
+
   &:hover {
     cursor: pointer;
     box-shadow: 0px 0px 8px 6px ${(p) => p.theme.accentColor};
@@ -68,7 +71,7 @@ const Genres = styled.p`
 MovieCard.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  posterPath: PropTypes.string.isRequired,
+  posterPath: PropTypes.string,
   genres: PropTypes.string,
 };
 

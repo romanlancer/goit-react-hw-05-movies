@@ -33,11 +33,18 @@ const Wrapper = styled.nav`
   display: flex;
 
   align-items: center;
+  @media ${breakpoints.mobile} {
+    width: 300px;
+  }
+
+  @media ${breakpoints.tablet} {
+    width: 100%;
+  }
 `;
 
 const Logo = styled(NavLink)`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 `;
 
 const Title = styled.h1`
@@ -54,7 +61,6 @@ const Title = styled.h1`
 
 const Menu = styled.ul`
   display: flex;
-  align-items: center;
   margin-left: auto;
 `;
 

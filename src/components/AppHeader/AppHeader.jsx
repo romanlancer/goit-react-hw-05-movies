@@ -17,7 +17,7 @@ const Header = () => {
 const Wrapper = styled.header`
   display: flex;
   align-items: center;
-  width: 100%;
+
   height: ${(p) => p.theme.headerHeight};
   background-color: ${(p) => p.theme.accentBG};
 `;

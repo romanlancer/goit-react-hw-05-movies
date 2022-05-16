@@ -24,10 +24,10 @@ const Wrapper = styled.ul`
   display: grid;
   gap: 30px;
   grid-template-columns: 1fr;
-  @media screen and (min-width: 768px) {
+  @media ${breakpoints.tablet} {
     grid-template-columns: 1fr 1fr;
   }
-  @media screen and (min-width: 1024px) {
+  @media ${breakpoints.laptop} {
     grid-template-columns: 1fr 1fr 1fr;
   }
 `;
@@ -41,7 +41,7 @@ MoviesGallery.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
-      posterPath: PropTypes.string.isRequired,
+      posterPath: PropTypes.string,
       genres: PropTypes.string,
     })
   ),
