@@ -5,9 +5,10 @@ import { Loading } from "notiflix/build/notiflix-loading-aio";
 import CastItem from "./CastItem";
 import { fetchCast } from "Services/movieApi";
 import { mappedCast } from "utils/mappedCast";
+import noCredits from "components/Cast/no-credits.webp";
 
 const MovieCast = ({ id }) => {
-  const [cast, setCast] = useState(null);
+  const [cast, setCast] = useState([]);
   Loading.standard("Loading...", {
     backgroundColor: "rgba(0,0,0,0.8)",
     svgSize: "100px",
@@ -24,14 +25,22 @@ const MovieCast = ({ id }) => {
 
   Loading.remove();
 
-  const renderCast = () =>
-    cast.map((item) => (
-      <Item key={item.id}>
-        <CastItem {...item} />
-      </Item>
-    ));
-
-  return <List>{cast ? renderCast() : "no credits"}</List>;
+  return (
+    <List>
+      {cast.length > 0 ? (
+        cast.map((item) => (
+          <Item key={item.id}>
+            <CastItem {...item} />
+          </Item>
+        ))
+      ) : (
+        <div className="noCredits">
+          <img width="180px" src={noCredits} alt="no credits" />
+          <p>Sorry no credits available</p>
+        </div>
+      )}
+    </List>
+  );
 };
 
 const List = styled.ul`
@@ -41,6 +50,10 @@ const List = styled.ul`
   padding: 10px;
   background-color: ${(p) => p.theme.mainColor};
   border-radius: 10px;
+  & .noCredits {
+    margin-right: auto;
+    font-size: 20px;
+  }
 `;
 
 const Item = styled.li`

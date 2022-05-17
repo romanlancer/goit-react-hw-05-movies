@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { breakpoints } from "utils/breakpoints";
+import noPoster from "UI/movie-poster-coming-soon.jpg";
 
 const MovieDetails = ({
   title,
@@ -9,41 +10,48 @@ const MovieDetails = ({
   overview,
   genres,
   posterPath,
-}) => (
-  <Wrapper>
-    <Thumb>
-      <picture>
-        <source
-          srcSet={`https://themoviedb.org/t/p/w500${posterPath}`}
-          media="(min-width: 1024px)"
-        />
-        <source
-          srcSet={`https://themoviedb.org/t/p/w342${posterPath}`}
-          media="(min-width: 768px)"
-        />
-        <img
-          alt={title}
-          loading="lazy"
-          src={`https://themoviedb.org/t/p/w342${posterPath}`}
-        />
-      </picture>
-    </Thumb>
+}) => {
+  console.log(posterPath);
+  return (
+    <Wrapper>
+      <Thumb>
+        {posterPath !== null ? (
+          <picture>
+            <source
+              srcSet={`https://themoviedb.org/t/p/w500${posterPath}`}
+              media="(min-width: 1024px)"
+            />
+            <source
+              srcSet={`https://themoviedb.org/t/p/w342${posterPath}`}
+              media="(min-width: 768px)"
+            />
+            <img
+              alt={title}
+              loading="lazy"
+              src={`https://themoviedb.org/t/p/w${posterPath}`}
+            />
+          </picture>
+        ) : (
+          <img src={noPoster} alt="no poster" loading="lazy" />
+        )}
+      </Thumb>
 
-    <Information>
-      <Title>{title}</Title>
-      <Subtitle>{qoute}</Subtitle>
+      <Information>
+        <Title>{title}</Title>
+        <Subtitle>{qoute}</Subtitle>
 
-      <BlockTitle>Release</BlockTitle>
-      <Paragraph>{release}</Paragraph>
+        <BlockTitle>Release</BlockTitle>
+        <Paragraph>{release}</Paragraph>
 
-      <BlockTitle>Genres</BlockTitle>
-      <Paragraph>{genres}</Paragraph>
+        <BlockTitle>Genres</BlockTitle>
+        <Paragraph>{genres}</Paragraph>
 
-      <BlockTitle>Overview</BlockTitle>
-      <Paragraph>{overview}</Paragraph>
-    </Information>
-  </Wrapper>
-);
+        <BlockTitle>Overview</BlockTitle>
+        <Paragraph>{overview}</Paragraph>
+      </Information>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.div`
   @media ${breakpoints.tablet} {

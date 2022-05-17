@@ -5,6 +5,7 @@ import { Loading } from "notiflix/build/notiflix-loading-aio";
 import ReviewItem from "./ReviewItem";
 import { fetchReviews } from "Services/movieApi";
 import { mappedReviews } from "utils/mappedReviews";
+import noData from "components/Reviews/no-reviews.png";
 
 const Reviews = ({ id }) => {
   const [reviews, setReviews] = useState([]);
@@ -20,8 +21,6 @@ const Reviews = ({ id }) => {
   }, [id]);
   Loading.remove();
 
-  // const noReviews = () => <p>no reviews</p>
-
   return (
     <List>
       {reviews.length > 0 ? (
@@ -31,7 +30,7 @@ const Reviews = ({ id }) => {
           </Item>
         ))
       ) : (
-        <p>no reviews</p>
+        <img width="300px" src={noData} alt="no review" />
       )}
     </List>
   );
@@ -39,6 +38,9 @@ const Reviews = ({ id }) => {
 
 const List = styled.ul`
   margin-top: 2px;
+  & img {
+    margin-top: 10px;
+  }
 `;
 
 const Item = styled.li`

@@ -6,7 +6,7 @@ import Container from "UI/container";
 import Section from "UI/section";
 import SearchBar from "components/SearchBar";
 import { Loading } from "notiflix/build/notiflix-loading-aio";
-
+import { Notify } from "notiflix/build/notiflix-notify-aio";
 import { mappedMovies } from "utils/mappedMoviesList";
 
 const MoviePage = ({ genresList }) => {
@@ -22,6 +22,17 @@ const MoviePage = ({ genresList }) => {
     });
     fetchSearch(query)
       .then((data) => {
+        if (data.results.length === 0) {
+          Notify.failure("Sorry nothing found on your query", {
+            fontSize: "18px",
+            cssAnimationStyle: "from-right",
+          });
+        } else {
+          Notify.success(`Hooray, we've found ${data.results.length} films`, {
+            fontSize: "18px",
+            cssAnimationStyle: "from-right",
+          });
+        }
         setMoviesList(mappedMovies(genresList, data.results));
       })
       .catch((err) => {

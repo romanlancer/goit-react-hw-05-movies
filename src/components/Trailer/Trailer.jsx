@@ -3,11 +3,10 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Loading } from "notiflix/build/notiflix-loading-aio";
 import { fetchFilmVideo } from "Services/movieApi";
-import ReactPlayer from "react-player";
 import { breakpoints } from "utils/breakpoints";
-import { YoutubeVideo } from "@wbe/react-video-player";
 import Iframe from "react-iframe";
-console.log(ReactPlayer);
+import noTrailer from "components/Trailer/no-trailer.png";
+
 const Trailers = ({ id }) => {
   const [trailers, setTrailers] = useState([]);
 
@@ -23,22 +22,33 @@ const Trailers = ({ id }) => {
     fetchFilmVideo(id).then((data) => setTrailers(data.results));
   }, [id]);
 
-  const renderTrailer = () =>
-    trailers.map((item) => (
-      <li key={item.id}>
-        <Iframe
-          url={`https://www.youtube.com/embed/${item.key}`}
-          width="100%"
-          height="250px"
-          allowFullScreen
-        />
-      </li>
-    ));
   Loading.remove();
-  return <List>{trailers ? renderTrailer() : "no trailers"}</List>;
+
+  return (
+    <List>
+      {trailers.length > 0 ? (
+        trailers.map((item) => (
+          <li key={item.id}>
+            <Iframe
+              url={`https://www.youtube.com/embed/${item.key}`}
+              width="100%"
+              height="250px"
+              allowFullScreen
+            />
+          </li>
+        ))
+      ) : (
+        <img width="300px" src={noTrailer} alt="no trailer" />
+      )}
+    </List>
+  );
 };
 
 export default Trailers;
+
+Trailers.propTypes = {
+  id: PropTypes.string.isRequired,
+};
 
 const List = styled.ul`
   margin-top: 10px;
@@ -51,5 +61,10 @@ const List = styled.ul`
   }
   @media ${breakpoints.laptop} {
     grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  & img {
+    margin-top: 10px;
+    border-radius: 20px;
   }
 `;

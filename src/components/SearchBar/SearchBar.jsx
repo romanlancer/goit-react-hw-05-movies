@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-
+import { Notify } from "notiflix/build/notiflix-notify-aio";
 import AccentButton from "UI/AccentButton";
 
 const SearchForm = ({ onSearch }) => {
@@ -10,6 +10,12 @@ const SearchForm = ({ onSearch }) => {
     e.preventDefault();
 
     const query = value.trim();
+    if (query === "") {
+      Notify.failure("Please enter something", {
+        fontSize: "18px",
+        cssAnimationStyle: "from-right",
+      });
+    }
     if (query) {
       onSearch(query);
       setValue("");
