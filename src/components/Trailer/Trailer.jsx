@@ -3,11 +3,13 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Loading } from "notiflix/build/notiflix-loading-aio";
 import { fetchFilmVideo } from "Services/movieApi";
-import ReactPlayer from "react-player/lazy";
+import ReactPlayer from "react-player";
 import { breakpoints } from "utils/breakpoints";
-
-const Trailer = ({ id }) => {
-  const [trailer, setTrailer] = useState([]);
+import { YoutubeVideo } from "@wbe/react-video-player";
+import Iframe from "react-iframe";
+console.log(ReactPlayer);
+const Trailers = ({ id }) => {
+  const [trailers, setTrailers] = useState([]);
 
   Loading.standard("Loading...", {
     backgroundColor: "rgba(0,0,0,0.8)",
@@ -18,29 +20,31 @@ const Trailer = ({ id }) => {
   });
 
   useEffect(() => {
-    fetchFilmVideo(id).then((data) => setTrailer(data.results));
+    fetchFilmVideo(id).then((data) => setTrailers(data.results));
   }, [id]);
-  console.log(trailer);
+
   const renderTrailer = () =>
-    trailer.map((item) => (
+    trailers.map((item) => (
       <li key={item.id}>
-        <ReactPlayer
-          src={`'https://www.youtube.com/watch?v=${item.key}'`}
+        <Iframe
+          url={`https://www.youtube.com/embed/${item.key}`}
           width="100%"
-          height="100%"
+          height="250px"
+          allowFullScreen
         />
       </li>
     ));
   Loading.remove();
-  return <List>{trailer ? renderTrailer() : "no trailers"}</List>;
+  return <List>{trailers ? renderTrailer() : "no trailers"}</List>;
 };
 
-export default Trailer;
+export default Trailers;
 
 const List = styled.ul`
+  margin-top: 10px;
   display: grid;
   color: black;
-  gap: 30px;
+  gap: 20px;
   grid-template-columns: 1fr;
   @media ${breakpoints.tablet} {
     grid-template-columns: 1fr 1fr;

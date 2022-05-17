@@ -7,7 +7,7 @@ import { fetchReviews } from "Services/movieApi";
 import { mappedReviews } from "utils/mappedReviews";
 
 const Reviews = ({ id }) => {
-  const [reviews, setReviews] = useState(null);
+  const [reviews, setReviews] = useState([]);
   Loading.standard("Loading...", {
     backgroundColor: "rgba(0,0,0,0.8)",
     svgSize: "100px",
@@ -19,14 +19,22 @@ const Reviews = ({ id }) => {
     fetchReviews(id).then((data) => setReviews(mappedReviews(data.results)));
   }, [id]);
   Loading.remove();
-  const renderReviews = () =>
-    reviews.map((item) => (
-      <Item key={item.id}>
-        <ReviewItem {...item} />
-      </Item>
-    ));
 
-  return <List>{reviews ? renderReviews() : "no reviews"}</List>;
+  // const noReviews = () => <p>no reviews</p>
+
+  return (
+    <List>
+      {reviews.length > 0 ? (
+        reviews.map((item) => (
+          <Item key={item.id}>
+            <ReviewItem {...item} />
+          </Item>
+        ))
+      ) : (
+        <p>no reviews</p>
+      )}
+    </List>
+  );
 };
 
 const List = styled.ul`

@@ -6,7 +6,7 @@ import Section from "UI/section";
 import MovieDetailsNavigation from "components/MovieDetails/MovieDetailsNavigation";
 import Cast from "components/Cast";
 import Reviews from "components/Reviews";
-import Trailer from "components/Trailer";
+import Trailers from "components/Trailer";
 import NavigateBackButton from "components/NavigateBackButton";
 import { movieDetails } from "utils/movieDetails";
 import { fetchFilmDetails } from "Services/movieApi";
@@ -44,7 +44,7 @@ const MovieDetailsPage = () => {
           <Route path="/" element={<Outlet />}>
             <Route path="credits" element={<Cast id={movieID} />} />
             <Route path="reviews" element={<Reviews id={movieID} />} />
-            <Route path="trailer" element={<Trailer id={movieID} />} />
+            <Route path="trailer" element={<Trailers id={movieID} />} />
           </Route>
         </Routes>
       </Container>

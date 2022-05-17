@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
-
+import noPhoto from "../CastItem/No-photo-m.png";
 const CastItem = ({ name, character, photo }) => {
   return (
     <Wrapper>
       {photo ? (
         <Photo src={`https://themoviedb.org/t/p/w185${photo}`} alt={name} />
       ) : (
-        <NoPhoto />
+        <NoPhoto src={noPhoto} alt={name} />
       )}
 
       <Title>{name}</Title>
@@ -26,9 +26,10 @@ const Photo = styled.img`
   border-radius: 5px;
 `;
 
-const NoPhoto = styled.div`
+const NoPhoto = styled.img`
   width: 124px;
-  height: 185px;
+  height: 186px;
+  object-fit: cover;
   background-color: ${(p) => p.theme.altColor};
   border-radius: 5px;
 `;

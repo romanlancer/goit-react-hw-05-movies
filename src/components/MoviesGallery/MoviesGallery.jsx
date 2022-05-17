@@ -22,7 +22,7 @@ const MoviesGallery = ({ list }) => {
 
 const Wrapper = styled.ul`
   display: grid;
-  gap: 30px;
+  gap: 25px;
   grid-template-columns: 1fr;
   @media ${breakpoints.tablet} {
     grid-template-columns: 1fr 1fr;
