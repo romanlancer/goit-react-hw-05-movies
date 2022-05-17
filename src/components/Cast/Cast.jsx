@@ -18,7 +18,6 @@ const MovieCast = ({ id }) => {
   });
   useEffect(() => {
     fetchCast(id).then((data) => {
-      console.log(data);
       setCast(mappedCast(data.cast));
     });
   }, [id]);

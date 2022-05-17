@@ -24,8 +24,8 @@ const MovieDetailsPage = () => {
       messageFontSize: "18px",
       messageColor: "#F66B0E",
     });
-    fetchFilmDetails(movieID).then((res) => {
-      setMovieData(movieDetails(res));
+    fetchFilmDetails(movieID).then((data) => {
+      setMovieData(movieDetails(data));
     });
     Loading.remove();
   }, [movieID]);
