@@ -74,6 +74,6 @@ export const fetchSearch = async (query) => {
     const response = await fetch(url);
     return response.json();
   } catch (error) {
-    return error;
+    Notify.failure("Oops, an error occurred");
   }
 };
