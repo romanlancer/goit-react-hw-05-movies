@@ -8,14 +8,12 @@ const NavigateBackButton = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  const [from, setFrom] = useState(null);
+  const [from, setFrom] = useState("");
 
   useEffect(() => {
     if (state?.from) {
       const { pathname, search } = state.from;
       setFrom(`${pathname}${search}`);
-    } else {
-      setFrom("/");
     }
   }, [state?.from]);
 
