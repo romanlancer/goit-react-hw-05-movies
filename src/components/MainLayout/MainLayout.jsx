@@ -13,8 +13,8 @@ const MainLayout = () => (
       bgColor="#F66B0E"
       size={60}
       strokeWidth={2}
-      symbolSize={30}
-      symbol="⮙"
+      symbolSize={25}
+      symbol="&#11181;"
     />
   </div>
 );
