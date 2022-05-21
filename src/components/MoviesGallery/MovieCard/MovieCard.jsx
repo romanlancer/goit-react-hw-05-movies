@@ -7,11 +7,21 @@ const MovieCard = ({ title, posterPath, genres }) => (
   <Wrapper>
     <Thumb>
       {posterPath !== null ? (
-        <Picture
-          alt={title}
-          loading="lazy"
-          src={`https://themoviedb.org/t/p/w342${posterPath}`}
-        />
+        <picture>
+          <source
+            srcSet={`https://themoviedb.org/t/p/w500${posterPath}`}
+            media="(min-width: 1024px)"
+          />
+          <source
+            srcSet={`https://themoviedb.org/t/p/w342${posterPath}`}
+            media="(min-width: 768px)"
+          />
+          <Picture
+            alt={title}
+            loading="lazy"
+            src={`https://themoviedb.org/t/p/w342${posterPath}`}
+          />
+        </picture>
       ) : (
         <Picture alt={title} loading="lazy" src={NoPoster} />
       )}

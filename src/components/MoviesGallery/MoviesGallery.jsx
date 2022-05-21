@@ -33,7 +33,7 @@ const Wrapper = styled.ul`
 `;
 
 const Item = styled.li`
-  width: 100px;
+  margin: 0 auto;
 `;
 
 MoviesGallery.propTypes = {

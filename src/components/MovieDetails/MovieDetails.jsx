@@ -34,7 +34,7 @@ const MovieDetails = ({
             <img
               alt={title}
               loading="lazy"
-              src={`https://themoviedb.org/t/p/w${posterPath}`}
+              src={`https://themoviedb.org/t/p/w342${posterPath}`}
             />
           </picture>
         ) : (
