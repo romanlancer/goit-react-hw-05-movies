@@ -1,22 +1,23 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
-
+import { ScrollToTop } from "react-to-top";
 import AppHeader from "../AppHeader";
 
 const MainLayout = () => (
-  <Wrapper>
+  <div>
     <AppHeader />
     <Main>
       <Outlet />
     </Main>
-  </Wrapper>
+    <ScrollToTop
+      bgColor="#F66B0E"
+      size={60}
+      strokeWidth={2}
+      symbolSize={30}
+      symbol="⮙"
+    />
+  </div>
 );
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
 
 const Main = styled.main`
   min-height: calc(100vh - ${(p) => p.theme.headerHeight});
